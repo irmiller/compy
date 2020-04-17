@@ -19,7 +19,7 @@ func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	if SupportsWebP(headers) {
 		w.Header().Set("Content-Type", "image/webp")
 		options := webp.Options{
-			Lossless: true,
+			Lossless: false,
 			Quality: float32(10),
 		}
 		if err = webp.Encode(w, img, &options); err != nil {
