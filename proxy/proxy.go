@@ -87,7 +87,7 @@ func (p *Proxy) StartTLS(host, cert, key string) error {
 }
 
 func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	log.Printf("serving request: %s", r.URL)
+	log.Printf("servig request: %s", r.URL)
 	if err := p.handle(w, r); err != nil {
 		log.Printf("%s while serving request: %s", err, r.URL)
 	}
