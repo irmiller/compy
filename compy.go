@@ -8,8 +8,8 @@ import (
 	"os/signal"
 	"sync/atomic"
 
-	"github.com/barnacs/compy/proxy"
-	tc "github.com/barnacs/compy/transcoder"
+	"github.com/irmiller/compy/proxy"
+	tc "github.com/barnacs/irmiller/transcoder"
 )
 
 var (
