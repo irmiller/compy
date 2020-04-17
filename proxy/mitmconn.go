@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 )
-f
+
 type mitmConn struct {
 	w          FlushWriter
 	r          io.Reader
