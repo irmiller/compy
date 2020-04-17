@@ -42,7 +42,7 @@ func (t *Jpeg) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	}
 	log.Prinf("before check")
 	if SupportsWebP(headers) {
-		w.Header().Set("Content-Type", "image/webp")
+		w.Header().Set("Content-Type", "image/jpg")
 		options := webp.Options{
 			Lossless: false,
 			Quality:  float32(encOptions.Quality),
