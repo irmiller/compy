@@ -27,8 +27,8 @@ On Ubuntu, run `apt-get install -y libjpeg8-dev openssl ssl-cert`.
 On macOS, run `brew install jpeg`.  Then compile via:
 
 ```ShellSession
-$ go get github.com/barnacs/compy
-$ cd go/src/github.com/barnacs/compy/
+$ go get github.com/irmiller/compy
+$ cd go/src/github.com/irmiller/compy/
 $ go install
 ```
 

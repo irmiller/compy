@@ -16,8 +16,8 @@ import (
 	"testing"
 
 	"github.com/ahmetb/go-httpbin"
-	"github.com/barnacs/compy/proxy"
-	tc "github.com/barnacs/compy/transcoder"
+	"github.com/irmiller/compy/proxy"
+	tc "github.com/irmiller/compy/transcoder"
 	"github.com/chai2010/webp"
 	brotlidec "gopkg.in/kothar/brotli-go.v0/dec"
 )

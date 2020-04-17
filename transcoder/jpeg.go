@@ -1,7 +1,7 @@
 package transcoder
 
 import (
-	"github.com/barnacs/compy/proxy"
+	"github.com/irmiller/compy/proxy"
 	"github.com/chai2010/webp"
 	"github.com/pixiv/go-libjpeg/jpeg"
 	"net/http"
@@ -40,9 +40,9 @@ func (t *Jpeg) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 			encOptions.Quality = quality
 		}
 	}
-	log.Printf("before check")
+	log.Prinf("before check")
 	if SupportsWebP(headers) {
-		w.Header().Set("Content-Type", "image/jpg")
+		w.Header().Set("Content-Type", "image/webp")
 		options := webp.Options{
 			Lossless: false,
 			Quality:  float32(encOptions.Quality),

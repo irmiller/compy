@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/barnacs/compy/proxy"
+	"github.com/irmiller/compy/proxy"
 	brotlidec "gopkg.in/kothar/brotli-go.v0/dec"
 	brotlienc "gopkg.in/kothar/brotli-go.v0/enc"
 )
