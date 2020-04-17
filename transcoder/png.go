@@ -20,6 +20,7 @@ func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		w.Header().Set("Content-Type", "image/webp")
 		options := webp.Options{
 			Lossless: true,
+			Quality: float32(10),
 		}
 		if err = webp.Encode(w, img, &options); err != nil {
 			return err
