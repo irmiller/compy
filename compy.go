@@ -9,7 +9,7 @@ import (
 	"sync/atomic"
 
 	"github.com/irmiller/compy/proxy"
-	tc "github.com/irmiller/transcoder"
+	tc "github.com/irmiller/compy/transcoder"
 )
 
 var (
