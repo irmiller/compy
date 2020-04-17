@@ -3,6 +3,7 @@ package transcoder
 import (
 	"net/http"
 	"strings"
+	"log"
 )
 
 func SupportsWebP(headers http.Header) bool {
