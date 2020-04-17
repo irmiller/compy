@@ -6,7 +6,6 @@ import (
 	"github.com/pixiv/go-libjpeg/jpeg"
 	"net/http"
 	"strconv"
-	"log"
 )
 
 type Jpeg struct {
