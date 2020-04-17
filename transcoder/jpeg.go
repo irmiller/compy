@@ -15,6 +15,7 @@ type Jpeg struct {
 }
 
 func NewJpeg(quality int) *Jpeg {
+	log.Printf("Processed")
 	return &Jpeg{
 		decOptions: &jpeg.DecoderOptions{},
 		encOptions: &jpeg.EncoderOptions{
