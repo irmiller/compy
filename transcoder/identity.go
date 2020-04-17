@@ -1,7 +1,7 @@
 package transcoder
 
 import (
-	"github.com/irmiller/compy/proxy"
+	"github.com/barnacs/compy/proxy"
 	"net/http"
 )
 

@@ -163,7 +163,7 @@ func (p *Proxy) handleLocalRequest(w http.ResponseWriter, r *http.Request) error
 <ul>
 <li>total transcoded: %d -> %d (%3.1f%%)</li>
 <li><a href="/cacert">CA cert</a></li>
-<li><a href="https://github.com/irmiller/compy">GitHub</a></li>
+<li><a href="https://github.com/barnacs/compy">GitHub</a></li>
 </ul>
 </body>
 </html>`, read, written, float64(written)/float64(read)*100))
