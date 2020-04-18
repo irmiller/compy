@@ -15,7 +15,6 @@ func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	if err != nil {
 		return err
 	}
-	log.Printf("logging")
 	if SupportsWebP(headers) {
 		w.Header().Set("Content-Type", "image/webp")
 		options := webp.Options{
