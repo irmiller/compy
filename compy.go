@@ -57,6 +57,7 @@ func main() {
 
 	if *jpeg != 0 {
 		p.AddTranscoder("image/jpeg", tc.NewJpeg(*jpeg))
+		p.AddTranscoder("image/jpg", tc.NewJpeg(*jpeg))
 	}
 	if *gif {
 		p.AddTranscoder("image/gif", &tc.Gif{})
