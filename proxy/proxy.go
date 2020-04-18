@@ -87,7 +87,7 @@ func (p *Proxy) StartTLS(host, cert, key string) error {
 }
 
 func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	log.Printf("servig request: %s", r.URL)
+	//log.Printf("serving request: %s", r.URL)
 	if err := p.handle(w, r); err != nil {
 		log.Printf("%s while serving request: %s", err, r.URL)
 	}
@@ -141,9 +141,11 @@ func (p *Proxy) handle(w http.ResponseWriter, r *http.Request) error {
 	rw := newResponseWriter(w)
 	rr := newResponseReader(resp)
 	err = p.proxyResponse(rw, rr, r.Header)
-	read := rr.counter.Count()
-	written := rw.rw.Count()
-	log.Printf("transcoded: %d -> %d (%3.1f%%)", read, written, float64(written)/float64(read)*100)
+	//read := rr.counter.Count()
+	//written := rw.rw.Count()
+	read := atomic.LoadUint64(&p.ReadCount)
+	written := atomic.LoadUint64(&p.WriteCount)
+	log.Printf("total transcoded: %d -> %d (%3.1f%%)", read, written, float64(written)/float64(read)*100)
 	atomic.AddUint64(&p.ReadCount, read)
 	atomic.AddUint64(&p.WriteCount, written)
 	return err
