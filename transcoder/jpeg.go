@@ -6,7 +6,6 @@ import (
 	"github.com/pixiv/go-libjpeg/jpeg"
 	"net/http"
 	"strconv"
-	"log"
 )
 
 type Jpeg struct {
@@ -39,7 +38,6 @@ func (t *Jpeg) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 			encOptions.Quality = quality
 		}
 	}
-	log.Printf("before check")
 	if SupportsWebP(headers) {
 		w.Header().Set("Content-Type", "image/webp")
 		options := webp.Options{
