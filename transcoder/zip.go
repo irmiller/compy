@@ -3,7 +3,7 @@ package transcoder
 import (
 	"compress/gzip"
 	"net/http"
-	"strings"
+	//"strings"
 	"log"
 
 	"github.com/irmiller/compy/proxy"
