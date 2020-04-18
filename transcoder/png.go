@@ -5,7 +5,7 @@ import (
 	"github.com/chai2010/webp"
 	"image/png"
 	"net/http"
-	"log"
+	//"log"
 )
 
 type Png struct{}
