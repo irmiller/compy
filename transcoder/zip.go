@@ -18,16 +18,16 @@ type Zip struct {
 }
 
 func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
-	shouldBrotli := false
-	shouldGzip := false
-	for _, v := range strings.Split(headers.Get("Accept-Encoding"), ", ") {
-		switch strings.SplitN(v, ";", 2)[0] {
-		case "br":
-			shouldBrotli = true
-		case "gzip":
-			shouldGzip = true
-		}
-	}
+	shouldBrotli := true
+// 	/shouldGzip := false
+	//for _, v := range strings.Split(headers.Get("Accept-Encoding"), ", ") {
+	//	//switch strings.SplitN(v, ";", 2)[0] {
+		//case "br":
+		//	shouldBrotli = true
+		//case "gzip":
+		//	shouldGzip = true
+		//}
+	//}
 
 	// always gunzip if the client supports Brotli
 	if r.Header().Get("Content-Encoding") == "gzip" && (shouldBrotli || !t.SkipCompressed) {
@@ -50,21 +50,22 @@ func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	}
 
 	if shouldBrotli && compress(r) {
+		log.Printf("brotli")
 		params := brotlienc.NewBrotliParams()
 		params.SetQuality(t.BrotliCompressionLevel)
 		brw := brotlienc.NewBrotliWriter(params, w.Writer)
 		defer brw.Close()
 		w.Writer = brw
 		w.Header().Set("Content-Encoding", "br")
-	} else if shouldGzip && compress(r) {
-		gzw, err := gzip.NewWriterLevel(w.Writer, t.GzipCompressionLevel)
-		if err != nil {
-			return err
-		}
-		defer gzw.Close()
-		w.Writer = gzw
-		w.Header().Set("Content-Encoding", "gzip")
-	}
+	}// else if shouldGzip && compress(r) {
+		//gzw, err := gzip.NewWriterLevel(w.Writer, t.GzipCompressionLevel)
+		//if err != nil {
+		//	return err
+		//}
+		///defer gzw.Close()
+		//w.Writer = gzw
+		//w.Header().Set("Content-Encoding", "gzip")
+	//}
 	return t.Transcoder.Transcode(w, r, headers)
 }
 
