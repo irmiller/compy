@@ -4,6 +4,7 @@ import (
 	"compress/gzip"
 	"net/http"
 	"strings"
+	"log"
 
 	"github.com/irmiller/compy/proxy"
 	brotlidec "gopkg.in/kothar/brotli-go.v0/dec"
