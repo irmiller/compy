@@ -3,9 +3,6 @@ package transcoder
 import (
 	"compress/gzip"
 	"net/http"
-	//"strings"
-	"log"
-
 	"github.com/irmiller/compy/proxy"
 	brotlidec "gopkg.in/kothar/brotli-go.v0/dec"
 	brotlienc "gopkg.in/kothar/brotli-go.v0/enc"
@@ -51,7 +48,6 @@ func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	}
 
 	if shouldBrotli && compress(r) {
-		log.Printf("brotli")
 		params := brotlienc.NewBrotliParams()
 		params.SetQuality(t.BrotliCompressionLevel)
 		brw := brotlienc.NewBrotliWriter(params, w.Writer)
