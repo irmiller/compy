@@ -144,9 +144,9 @@ func (p *Proxy) handle(w http.ResponseWriter, r *http.Request) error {
 	err = p.proxyResponse(rw, rr, r.Header)
 	read := rr.counter.Count()
 	written := rw.rw.Count()
-	r := atomic.LoadUint64(&p.ReadCount)
-	w := atomic.LoadUint64(&p.WriteCount)
-	log.Printf("total transcoded: %d -> %d (%3.1f%%)", r, w, float64(w)/float64(r)*100)
+	tr := atomic.LoadUint64(&p.ReadCount)
+	tw := atomic.LoadUint64(&p.WriteCount)
+	log.Printf("total transcoded: %d -> %d (%3.1f%%)", tr, tw, float64(tw)/float64(tr)*100)
 	atomic.AddUint64(&p.ReadCount, read)
 	atomic.AddUint64(&p.WriteCount, written)
 	return err
