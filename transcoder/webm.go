@@ -13,7 +13,7 @@ type WebM struct{}
 
 func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 	webM, _  := ioutil.ReadAll(r)
-	webMT := ""
+	var webMT []byte
 	w.Header().Set("Content-Type", "video/webm")
 	trans := new(transcoder.Transcoder)
 	err := trans.Initialize( webM, webMT )
