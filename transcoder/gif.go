@@ -2,16 +2,18 @@ package transcoder
 
 import (
 	"github.com/irmiller/compy/proxy"
-	"github.com/chai2010/webp"
-	"image/gif"
+	//"github.com/chai2010/webp"
+	//"image/gif"
 	"net/http"
+	"io/ioutil"
 	giftowebp "github.com/sizeofint/gif-to-webp"
 )
 
 type Gif struct{}
 
 func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
-	img, err := gif.Decode(r)
+	//img, err := gif.Decode(r)
+	gifBin, _  := ioutil.ReadFile(r)
 	if err != nil {
 		return err
 	}
@@ -24,7 +26,7 @@ func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		converter  := giftowebp.NewConverter()
 		converter.WebPAnimEncoderOptions.SetKmin(9)
 		converter.WebPAnimEncoderOptions.SetKmax(17)
-		webpBin, err  := converter.Convert(img)
+		webpBin, err  := converter.Convert(gifBin)
 		w.Write(webpBin)
 		//if err = webp.Encode(w, img, &options); err != nil {
 		//	return err
