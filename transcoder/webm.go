@@ -20,7 +20,7 @@ func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	webmBin, _ := ioutil.ReadAll(r);
 		
 	in, err := trans.CreateInputPipe()
-	webM := in.Read(webmBin)
+	webM := &in.Read(webmBin)
 	
 	out, err := trans.CreateOutputPipe("webm")
 	
