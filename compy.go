@@ -27,7 +27,7 @@ var (
 	gzip   = flag.Int("gzip", 6, "gzip compression level (0-9)")
 	png    = flag.Bool("png", true, "transcode png")
 	webm   = flag.Bool("webm", true, "transcode webm")
-	minify = flag.Bool("minify", false, "minify css/html/js - WARNING: tends to break the web")
+	minify = flag.Bool("minify", true, "minify css/html/js - WARNING: tends to break the web")
 )
 
 func main() {
