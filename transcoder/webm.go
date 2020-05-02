@@ -23,10 +23,12 @@ func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	cmd.Stdin = bytes.NewReader(webmBin)
 	
 	var web []byte
-	cmd.Stdout = web
+	
+	cmd.Stdout = bytes.NewReader(web)
+	
 	err := cmd.Run()
 			    
-	webMT, err := ioutil.ReadAll(web)
+	//webMT, err := ioutil.ReadAll(web)
 	
 	w.Write(webMT)
 	return nil
