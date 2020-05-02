@@ -17,7 +17,7 @@ func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	trans := new(transcoder.Transcoder)
 	err := trans.InitializeEmptyTranscoder()
 	
-	webmBin := ioutil.ReadAll(r);
+	webmBin, _ := ioutil.ReadAll(r);
 		
 	in, err := trans.CreateInputPipe()
 	webM := in.Read(webmBin)
