@@ -29,10 +29,10 @@ func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		//if err = webp.Encode(w, img, &options); err != nil {
 		//	return err
 		//}
-	} //else {
+	//} //else {
 		//if err = gif.Encode(w, img, nil); err != nil {
 		//	return err
 		//}
-	}
+	//}
 	return nil
 }
