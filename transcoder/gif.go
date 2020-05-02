@@ -12,7 +12,10 @@ import (
 type Gif struct{}
 
 func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
-	gifBin, _  := ioutil.ReadAll(r)
+	gifBin, err  := ioutil.ReadAll(r)
+	//if err == nil{
+	//	return nil
+	//}
 	w.Header().Set("Content-Type", "image/webp")
 
 	converter  := giftowebp.NewConverter()
@@ -22,7 +25,10 @@ func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	converter.WebPConfig.SetPreprocessing(2)
 	converter.WebPAnimEncoderOptions.SetKmin(9)
 	converter.WebPAnimEncoderOptions.SetKmax(17)
-	webpBin, _  := converter.Convert(gifBin)
+	webpBin, err  := converter.Convert(gifBin)
+	//if err == nil{
+	//	return nil
+	//}
 	w.Write(webpBin)
 
 	return nil
