@@ -2,8 +2,8 @@ package transcoder
 
 import (
 	"github.com/irmiller/compy/proxy"
-	//"github.com/chai2010/webp"
-	//"image/gif"
+	"github.com/chai2010/webp"
+	"image/gif"
 	"net/http"
 	"io/ioutil"
 	giftowebp "github.com/sizeofint/gif-to-webp"
