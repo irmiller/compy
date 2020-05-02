@@ -19,7 +19,7 @@ func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	converter.WebPConfig.SetEmulateJpegSize(1)
 	converter.WebPConfig.SetQuality(20)
 	//converter.WebPConfig.SetThreadLevel(2)
-	converter.WebPConfig..SetPreprocessing(2)
+	converter.WebPConfig.SetPreprocessing(2)
 	converter.WebPAnimEncoderOptions.SetKmin(9)
 	converter.WebPAnimEncoderOptions.SetKmax(17)
 	webpBin, _  := converter.Convert(gifBin)
