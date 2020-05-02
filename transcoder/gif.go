@@ -5,6 +5,7 @@ import (
 	"github.com/chai2010/webp"
 	"image/gif"
 	"net/http"
+	giftowebp "github.com/sizeofint/gif-to-webp"
 )
 
 type Gif struct{}
@@ -14,18 +15,24 @@ func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	if err != nil {
 		return err
 	}
-	if SupportsWebP(headers) {
+	//if SupportsWebP(headers) {
 		w.Header().Set("Content-Type", "image/webp")
 		options := webp.Options{
-			Lossless: true,
+			Lossless: false,
+			Quality: 10,
 		}
-		if err = webp.Encode(w, img, &options); err != nil {
-			return err
-		}
-	} else {
-		if err = gif.Encode(w, img, nil); err != nil {
-			return err
-		}
+		converter  := giftowebp.NewConverter()
+		converter.WebPAnimEncoderOptions.SetKmin(9)
+		converter.WebPAnimEncoderOptions.SetKmax(17)
+		webpBin, err  := converter.Convert(img)
+		w.Write(webpBin)
+		//if err = webp.Encode(w, img, &options); err != nil {
+		//	return err
+		//}
+	} //else {
+		//if err = gif.Encode(w, img, nil); err != nil {
+		//	return err
+		//}
 	}
 	return nil
 }
