@@ -22,11 +22,11 @@ func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	cmd := exec.Command("ffmpeg", "-i", "pipe:0", "-c:av copy", "-b:v 1000", "-")
 	cmd.Stdin = bytes.NewReader(webmBin)
 	
-	web := ""
+	var web []bytes
 	cmd.Stdout = web
 	err := cmd.Run()
 			    
-	webMT, err := ioutil.ReadAll(imageBuffer)
+	webMT, err := ioutil.ReadAll(web)
 	
 	w.Write(webMT)
 	return nil
