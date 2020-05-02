@@ -29,7 +29,7 @@ func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	
 	cmd.Run()
 			    
-	webMT, err := ioutil.ReadAll(wr)
+	webMT, _ := ioutil.ReadAll(wr)
 	
 	w.Write(webMT)
 	return nil
