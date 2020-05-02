@@ -6,7 +6,6 @@ import (
 	//"image/gif"
 	"net/http"
 	"io/ioutil"
-    	"github.com/xfrr/goffmpeg/transcoder"
 )
 
 type WebM struct{}
@@ -14,21 +13,16 @@ type WebM struct{}
 func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 	w.Header().Set("Content-Type", "video/webm")
 	
-	trans := new(transcoder.Transcoder)
-	err := trans.InitializeEmptyTranscoder()
 	
 	webmBin, _ := ioutil.ReadAll(r);
 		
-	in, err := trans.CreateInputPipe()
-	webM := &in.Read(webmBin)
-	
-	out, err := trans.CreateOutputPipe("webm")
-	
-	trans.MediaFile().SetPreset("ultrafast")
-	
-	done := trans.Run(false)
-	
-	webMT, err := ioutil.ReadAll(out)
+	cmd := exec.Command("ffmpeg", "-i", "pipe:0", "-a:copy, "-b:v 1000", "fmt.Sprintf("%dx%d", width, height)", "-")
+	cmd.Stdin = bytes.NewReader(webmBin)
+	var imageBuffer bytes.Buffer
+	cmd.Stdout = &imageBuffer
+	err := cmd.Run()
+			    
+	webMT, err := ioutil.ReadAll(imageBuffer)
 	
 	w.Write(webMT)
 	return nil
