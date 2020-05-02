@@ -7,6 +7,7 @@ import (
 	"github.com/tdewolff/minify/html"
 	"github.com/tdewolff/minify/js"
 	"net/http"
+	"log"
 )
 
 type Minifier struct {
@@ -14,6 +15,7 @@ type Minifier struct {
 }
 
 func NewMinifier() *Minifier {
+	log.PrintF("minify")
 	m := minify.New()
 	m.AddFunc("text/html", html.Minify)
 	m.AddFunc("text/css", css.Minify)
