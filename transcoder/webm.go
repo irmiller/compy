@@ -6,6 +6,9 @@ import (
 	//"image/gif"
 	"net/http"
 	"io/ioutil"
+	"bytes"
+	"os/exec"
+	
 )
 
 type WebM struct{}
