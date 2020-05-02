@@ -79,11 +79,28 @@ func (p *Proxy) AddTranscoder(contentType string, transcoder Transcoder) {
 }
 
 func (p *Proxy) Start(host string) error {
-	return http.ListenAndServe(host, p)
+	sv := &http.Server{
+		Addr: host,
+		Handler: p,
+		ReadTimeout: 120*time.Second,
+		ReadHeaderTimeout: 30*time.Second,
+		WriteTimeout: 120*time.Second,
+		IdleTimeout: 240*time.Second,
+	}
+	return sv.ListenAndServe()
 }
 
+
 func (p *Proxy) StartTLS(host, cert, key string) error {
-	return http.ListenAndServeTLS(host, cert, key, p)
+	sv := &http.Server{
+		Addr: host,
+		Handler: p,
+		ReadTimeout: 120*time.Second,
+		ReadHeaderTimeout: 30*time.Second,
+		WriteTimeout: 120*time.Second,
+		IdleTimeout: 240*time.Second,
+	}
+	return sv.ListenAndServeTLS(cert, key)
 }
 
 func (p *Proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
