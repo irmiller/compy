@@ -18,13 +18,12 @@ func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	
 	
 	webmBin, _ := ioutil.ReadAll(r)
+	webmBinOut, _ := ioutil.ReadAll(r)
 		
 	cmd := exec.Command("ffmpeg", "-i", "pipe:0", "-c:av copy", "-b:v 1000", "-")
 	cmd.Stdin = bytes.NewReader(webmBin)
-	
-	var web []byte
-	
-	cmd.Stdout = bytes.NewReader(web)
+
+	cmd.Stdout = bytes.NewReader(webmBinOut)
 	
 	err := cmd.Run()
 			    
