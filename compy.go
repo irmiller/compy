@@ -66,9 +66,9 @@ func main() {
 	if *png {
 		p.AddTranscoder("image/png", &tc.Png{})
 	}
-	if *webm {
-		p.AddTranscoder("video/webm", &tc.Webm{})
-	}
+	//if *webm {
+	//	p.AddTranscoder("video/webm", &tc.Webm{})
+	//}
 
 	var ttc proxy.Transcoder
 	if *minify {
@@ -89,8 +89,8 @@ func main() {
 		for range c {
 			read := atomic.LoadUint64(&p.ReadCount)
 			written := atomic.LoadUint64(&p.WriteCount)
-			log.Printf("compy exiting, total transcoded: %d -> %d (%3.1f%%)",
-				read, written, float64(written)/float64(read)*100)
+			log.Printf("Quit: %d -> %d (%3.1f%%)",
+				read/80000, written/80000, float64(written)/float64(read)*100)
 			os.Exit(0)
 		}
 	}()
