@@ -13,18 +13,18 @@ type WebM struct{}
 
 func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 	w.Header().Set("Content-Type", "video/webm")
+	
 	trans := new(transcoder.Transcoder)
 	err := trans.InitializeEmptyTranscoder()
+	
 	webmBin := ioutil.ReadAll(r);
-	
-	
+		
 	in, err := trans.CreateInputPipe()
-	webM = in.Read(webmBin)
+	webM := in.Read(webmBin)
 	
 	out, err := trans.CreateOutputPipe("webm")
 	
 	trans.MediaFile().SetPreset("ultrafast")
-	trans.MediaFile().SetQuality(20)
 	
 	done := trans.Run(false)
 	
