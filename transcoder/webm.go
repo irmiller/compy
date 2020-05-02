@@ -26,8 +26,24 @@ func (t *Webm) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	
 	wr, wwr := io.Pipe()
 	
-	cmd.Stdout = wwr
+	cmd.Stdout = wr
 	
+	wg := &sync.WaitGroup{}
+	wg.Add(1)
+	go func() {
+		defer wr.Close()
+		defer wg.Done()
+
+		// Read data from output pipe
+		data, err := ioutil.ReadAll(wr)
+		// Handle error and data...
+	}()
+
+	go func() {
+		defer w.Close()
+		err := cmd.Run()
+		// Handle error...
+	}()
 	cmd.Start()
 			    
 	webMT, _ := ioutil.ReadAll(wr)
