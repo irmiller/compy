@@ -6,24 +6,21 @@ import (
 	//"image/gif"
 	"net/http"
 	"io/ioutil"
-	giftowebp "github.com/sizeofint/gif-to-webp"
+    	"github.com/xfrr/goffmpeg/transcoder"
 )
 
-type Gif struct{}
+type WebM struct{}
 
-func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
-	gifBin, _  := ioutil.ReadAll(r)
-	w.Header().Set("Content-Type", "image/webp")
-
-	converter  := giftowebp.NewConverter()
-	converter.WebPConfig.SetEmulateJpegSize(1)
-	converter.WebPConfig.SetQuality(20)
-	//converter.WebPConfig.SetThreadLevel(2)
-	converter.WebPConfig.SetPreprocessing(2)
-	converter.WebPAnimEncoderOptions.SetKmin(9)
-	converter.WebPAnimEncoderOptions.SetKmax(17)
-	webpBin, _  := converter.Convert(gifBin)
-	w.Write(webpBin)
-
+func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
+	webM, _  := ioutil.ReadAll(r)
+	webMT := ""
+	w.Header().Set("Content-Type", "video/webm")
+	trans := new(transcoder.Transcoder)
+	err := trans.Initialize( webM, webMT )
+	trans.MediaFile().SetPreset("ultrafast")
+	trans.MediaFile().SetQuality(20)
+	done := trans.Run(false)
+	
+	w.Write(webMT)
 	return nil
 }
