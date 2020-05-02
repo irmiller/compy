@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"bytes"
 	"os/exec"
+	"log"
 	
 )
 
@@ -17,7 +18,7 @@ type Webm struct{}
 func (t *Webm) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 	w.Header().Set("Content-Type", "video/webm")
 	
-	console.log("video found")
+	log.Printf("video found")
 	webmBin, _ := ioutil.ReadAll(r)
 		
 	cmd := exec.Command("ffmpeg", "-i", "pipe:0", "-c:av copy", "-b:v 1000", "-")
