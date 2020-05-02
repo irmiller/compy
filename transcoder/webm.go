@@ -23,7 +23,7 @@ func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	cmd.Stdin = bytes.NewReader(webmBin)
 	
 	web := ""
-	cmd.Stdout = &web
+	cmd.Stdout = web
 	err := cmd.Run()
 			    
 	webMT, err := ioutil.ReadAll(imageBuffer)
