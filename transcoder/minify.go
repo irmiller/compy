@@ -15,7 +15,7 @@ type Minifier struct {
 }
 
 func NewMinifier() *Minifier {
-	log.PrintF("minify")
+	log.Printf("minify")
 	m := minify.New()
 	m.AddFunc("text/html", html.Minify)
 	m.AddFunc("text/css", css.Minify)
