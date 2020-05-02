@@ -14,7 +14,7 @@ func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	w.Header().Set("Content-Type", "video/webm")
 	
 	
-	webmBin, _ := ioutil.ReadAll(r);
+	webmBin, _ := ioutil.ReadAll(r)
 		
 	cmd := exec.Command("ffmpeg", "-i", "pipe:0", "-c:av copy, "-b:v 1000", "-")
 	cmd.Stdin = bytes.NewReader(webmBin)
