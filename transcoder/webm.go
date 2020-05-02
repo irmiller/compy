@@ -15,18 +15,20 @@ func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	w.Header().Set("Content-Type", "video/webm")
 	trans := new(transcoder.Transcoder)
 	err := trans.InitializeEmptyTranscoder()
+	webmBin := ioutil.ReadAll(r);
+	
 	
 	in, err := trans.CreateInputPipe()
-	webM = in.Read(ioutil.ReadAll(r))
+	webM = in.Read(webmBin)
 	
-	r, err := trans.CreateOutputPipe("webm")
+	out, err := trans.CreateOutputPipe("webm")
 	
 	trans.MediaFile().SetPreset("ultrafast")
 	trans.MediaFile().SetQuality(20)
 	
 	done := trans.Run(false)
 	
-	webMT, err := ioutil.ReadAll(r)
+	webMT, err := ioutil.ReadAll(out)
 	
 	w.Write(webMT)
 	return nil
