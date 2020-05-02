@@ -35,19 +35,19 @@ func main() {
 
 	p := proxy.New(*host, *cert)
 
-	if (*ca == "") != (*caKey == "") {
-		log.Fatalln("must specify both CA certificate and key")
-	}
+	//if (*ca == "") != (*caKey == "") {
+	//	log.Fatalln("must specify both CA certificate and key")
+	//}
 
-	if (*cert == "") != (*key == "") {
-		log.Fatalln("must specify both certificate and key")
-	}
+	//if (*cert == "") != (*key == "") {
+	//	log.Fatalln("must specify both certificate and key")
+	//}
 
-	if *ca != "" {
-		if err := p.EnableMitm(*ca, *caKey); err != nil {
-			fmt.Println("not using mitm:", err)
-		}
-	}
+	//if *ca != "" {
+	//	if err := p.EnableMitm(*ca, *caKey); err != nil {
+	//		fmt.Println("not using mitm:", err)
+		/}
+	//}
 
 	// TODO: require cert and key?
 	if (*user == "") != (*pass == "") {
@@ -96,11 +96,12 @@ func main() {
 
 	log.Printf("compy listening on %s", *host)
 
-	var err error
-	if *cert != "" {
-		err = p.StartTLS(*host, *cert, *key)
-	} else {
-		err = p.Start(*host)
+	//var err error
+	//if *cert != "" {
+	//	err = p.StartTLS(*host, *cert, *key)
+	//} else {
+		//err =
+	p.Start(*host)
 	}
 	log.Fatalln(err)
 }
