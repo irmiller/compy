@@ -25,7 +25,7 @@ func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	converter.WebPConfig.SetPreprocessing(2)
 	converter.WebPAnimEncoderOptions.SetKmin(9)
 	converter.WebPAnimEncoderOptions.SetKmax(17)
-	webpBin, err  := converter.Convert(gifBin)
+	webpBin, _  := converter.Convert(gifBin)
 	//if err == nil{
 	//	return nil
 	//}
