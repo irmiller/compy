@@ -21,7 +21,7 @@ func (t *Webm) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	log.Printf("video found")
 	webmBin, _ := ioutil.ReadAll(r)
 		
-	cmd := exec.Command("ffmpeg", "-i", "pipe:0", "-c:av copy", "-b:v 1000", ,"-v",-")
+	cmd := exec.Command("ffmpeg", "-i", "pipe:0", "-c:av copy", "-b:v 1000", ,"-v","-")
 	cmd.Stdin = bytes.NewReader(webmBin)
 	
 	wr, wwr := io.Pipe()
