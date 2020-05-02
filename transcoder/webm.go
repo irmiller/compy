@@ -27,10 +27,10 @@ func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	
 	cmd.Stdout = wwr
 	
-	err := cmd.Run()
+	cmd.Run()
 			    
 	webMT, err := ioutil.ReadAll(wr)
 	
-	//w.Write(webMT)
+	w.Write(webMT)
 	return nil
 }
