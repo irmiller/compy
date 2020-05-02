@@ -89,7 +89,7 @@ func main() {
 		for range c {
 			read := atomic.LoadUint64(&p.ReadCount)
 			written := atomic.LoadUint64(&p.WriteCount)
-			log.Printf("Quit: %d -> %d (%3.1f%%)",
+			log.Printf("Quit: %dMB -> %dMB (%3.1f%%)",
 				read/80000, written/80000, float64(written)/float64(read)*100)
 			os.Exit(0)
 		}
