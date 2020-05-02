@@ -26,6 +26,7 @@ func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		converter  := giftowebp.NewConverter()
 		converter.WebPAnimEncoderOptions.SetKmin(9)
 		converter.WebPAnimEncoderOptions.SetKmax(17)
+		converter.SetQuality(0)
 		webpBin, _  := converter.Convert(gifBin)
 		w.Write(webpBin)
 		//if err = webp.Encode(w, img, &options); err != nil {
