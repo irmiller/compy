@@ -19,14 +19,14 @@ func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	//}
 	//if SupportsWebP(headers) {
 		w.Header().Set("Content-Type", "image/webp")
-		options := webp.Options{
-			Lossless: false,
-			Quality: 10,
-		}
+		///options := webp.Options{
+		//	Lossless: false,
+		//	Quality: 10,
+		//}
 		converter  := giftowebp.NewConverter()
 		converter.WebPAnimEncoderOptions.SetKmin(9)
 		converter.WebPAnimEncoderOptions.SetKmax(17)
-		webpBin, err  := converter.Convert(gifBin)
+		webpBin, _  := converter.Convert(gifBin)
 		w.Write(webpBin)
 		//if err = webp.Encode(w, img, &options); err != nil {
 		//	return err
