@@ -5,6 +5,7 @@ import (
 	//"github.com/chai2010/webp"
 	//"image/gif"
 	"net/http"
+	"io"
 	"io/ioutil"
 	"bytes"
 	"os/exec"
@@ -22,13 +23,15 @@ func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 		
 	cmd := exec.Command("ffmpeg", "-i", "pipe:0", "-c:av copy", "-b:v 1000", "-")
 	cmd.Stdin = bytes.NewReader(webmBin)
-
-	cmd.Stdout = bytes.NewWriter(webmBinOut)
+	
+	wembPipereader, webmPiperWriter := io.Pipe()
+	
+	cmd.Stdout = webmPiperWriter
 	
 	err := cmd.Run()
 			    
 	//webMT, err := ioutil.ReadAll(web)
 	
-	w.Write(webMT)
+	//w.Write(webMT)
 	return nil
 }
