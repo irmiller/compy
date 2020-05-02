@@ -12,9 +12,9 @@ import (
 	
 )
 
-type WebM struct{}
+type Webm struct{}
 
-func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
+func (t *Webm) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 	w.Header().Set("Content-Type", "video/webm")
 	
 	
