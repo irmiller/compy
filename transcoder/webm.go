@@ -6,7 +6,6 @@ import (
 	//"image/gif"
 	"net/http"
 	"io/ioutil"
-	"bytes"
 	"os/exec"
 	
 )
@@ -22,7 +21,7 @@ func (t *WebM) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 	cmd := exec.Command("ffmpeg", "-i", "pipe:0", "-c:av copy", "-b:v 1000", "-")
 	cmd.Stdin = bytes.NewReader(webmBin)
 	
-	var web []bytes
+	var web []byte
 	cmd.Stdout = web
 	err := cmd.Run()
 			    
