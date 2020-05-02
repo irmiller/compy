@@ -24,6 +24,8 @@ func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		//	Quality: 10,
 		//}
 		converter  := giftowebp.NewConverter()
+		converter.WebPConfig.SetEmulateJpegSize(1)
+		converter.WebPConfig.SetQuality(0)
 		converter.WebPAnimEncoderOptions.SetKmin(9)
 		converter.WebPAnimEncoderOptions.SetKmax(17)
 		converter.SetQuality(0)
