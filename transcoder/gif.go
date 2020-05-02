@@ -13,7 +13,7 @@ type Gif struct{}
 
 func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 	//img, err := gif.Decode(r)
-	gifBin, _  := ioutil.ReadFile(r)
+	gifBin, _  := ioutil.ReadAll(r)
 	if err != nil {
 		return err
 	}
