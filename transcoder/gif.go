@@ -12,7 +12,7 @@ import (
 type Gif struct{}
 
 func (t *Gif) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
-	gifBin, err  := ioutil.ReadAll(r)
+	gifBin, _  := ioutil.ReadAll(r)
 	//if err == nil{
 	//	return nil
 	//}
