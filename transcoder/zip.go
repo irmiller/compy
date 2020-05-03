@@ -29,7 +29,6 @@ func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	//}
 
 	// always gunzip if the client supports Brotli
-	log.Printf(r.Header().Get("url"))
 	if r.Header().Get("Content-Encoding") == "gzip" && (shouldBrotli || !t.SkipCompressed) {
 		gzr, err := gzip.NewReader(r.Reader)
 		if err != nil {
@@ -49,14 +48,14 @@ func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		w.Header().Del("Content-Encoding")
 	}
 
-	//if shouldBrotli && compress(r) {
-		//params := brotlienc.NewBrotliParams()
-		//params.SetQuality(t.BrotliCompressionLevel)
-		//brw := brotlienc.NewBrotliWriter(params, w.Writer)
-		//defer brw.Close()
-		//w.Writer = brw
-		//w.Header().Set("Content-Encoding", "br")
-	//} else if shouldGzip && compress(r) {
+	if r.Header().Get("Content-Type") == "application/json" {
+		params := brotlienc.NewBrotliParams()
+		params.SetQuality(t.BrotliCompressionLevel)
+		brw := brotlienc.NewBrotliWriter(params, w.Writer)
+		defer brw.Close()
+		w.Writer = brw
+		w.Header().Set("Content-Encoding", "br")
+	} else {
 		gzw, err := gzip.NewWriterLevel(w.Writer, 9)
 		if err != nil {
 			return err
@@ -64,7 +63,7 @@ func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		defer gzw.Close()
 		w.Writer = gzw
 		w.Header().Set("Content-Encoding", "gzip")
-	//}
+	}
 	return t.Transcoder.Transcode(w, r, headers)
 }
 
