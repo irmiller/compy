@@ -8,6 +8,7 @@ import (
 	"github.com/tdewolff/minify/js"
 	//"github.com/tdewolff/minify/json"
 	"net/http"
+	"log"
 )
 
 type Minifier struct {
@@ -28,5 +29,6 @@ func NewMinifier() *Minifier {
 }
 
 func (t *Minifier) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
+	log.Printf(headers["Host"])
 	return t.m.Minify(r.ContentType(), w, r)
 }
