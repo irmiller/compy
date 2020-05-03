@@ -21,7 +21,7 @@ func NewMinifier() *Minifier {
 	m.AddFunc("text/javascript", js.Minify)
 	m.AddFunc("application/javascript", js.Minify)
 	m.AddFunc("application/x-javascript", js.Minify)
-	m.AddFunc("application/json", js.Minify)
+	//m.AddFunc("application/json", js.Minify)
 	return &Minifier{
 		m: m,
 	}
