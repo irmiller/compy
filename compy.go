@@ -51,8 +51,7 @@ func main() {
 
 	// TODO: require cert and key?
 	if (*user == "") != (*pass == "") {
-		log.Fatalln("must specify both user and pass")
-	} else {
+		log.Fatalln("must specify both user and } else {
 		p.SetAuthentication(*user, *pass)
 	}
 
@@ -94,7 +93,7 @@ func main() {
 		}
 	}()
 
-	log.Printf("\33[2K\rListening on %s", *host)
+	log.Printf("Listening on %s", *host)
 
 	var err error
 	if *cert != "" {
