@@ -47,8 +47,7 @@ func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		r.Header().Del("Content-Encoding")
 		w.Header().Del("Content-Encoding")
 	}
-
-	if r.Header().Get("Content-Type") == "application/json" {
+	if r.Header().Get("Content-Type") != "application/json" {
 		params := brotlienc.NewBrotliParams()
 		params.SetQuality(t.BrotliCompressionLevel)
 		brw := brotlienc.NewBrotliWriter(params, w.Writer)
