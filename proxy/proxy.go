@@ -15,7 +15,7 @@ import (
 	"strings"
 	"sync/atomic"
 	"time"
-	//vt100 "github.com/psquid/go-vt100/vt100"
+	vt100 "github.com/psquid/go-vt100/vt100"
 )
 
 type Proxy struct {
