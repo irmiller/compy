@@ -29,7 +29,7 @@ func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	//}
 
 	// always gunzip if the client supports Brotli
-	log.Printf(r.Header().Get("Host"))
+	log.Printf(w.Header().Get("Host"))
 	if r.Header().Get("Content-Encoding") == "gzip" && (shouldBrotli || !t.SkipCompressed) {
 		gzr, err := gzip.NewReader(r.Reader)
 		if err != nil {
