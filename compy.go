@@ -94,7 +94,7 @@ func main() {
 		}
 	}()
 
-	log.Printf("compy listening on %s", *host)
+	log.Printf("\33[2K\rListening on %s", *host)
 
 	var err error
 	if *cert != "" {
