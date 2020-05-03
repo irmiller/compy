@@ -47,13 +47,13 @@ func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		w.Header().Del("Content-Encoding")
 	}
 
-	if shouldBrotli && compress(r) {
-		params := brotlienc.NewBrotliParams()
-		params.SetQuality(t.BrotliCompressionLevel)
-		brw := brotlienc.NewBrotliWriter(params, w.Writer)
-		defer brw.Close()
-		w.Writer = brw
-		w.Header().Set("Content-Encoding", "br")
+	//if shouldBrotli && compress(r) {
+		//params := brotlienc.NewBrotliParams()
+		//params.SetQuality(t.BrotliCompressionLevel)
+		//brw := brotlienc.NewBrotliWriter(params, w.Writer)
+		//defer brw.Close()
+		//w.Writer = brw
+		//w.Header().Set("Content-Encoding", "br")
 	}// else if shouldGzip && compress(r) {
 		//gzw, err := gzip.NewWriterLevel(w.Writer, t.GzipCompressionLevel)
 		//if err != nil {
