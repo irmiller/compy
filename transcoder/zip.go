@@ -54,7 +54,7 @@ func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		//defer brw.Close()
 		//w.Writer = brw
 		//w.Header().Set("Content-Encoding", "br")
-	}// else if shouldGzip && compress(r) {
+	//} else if shouldGzip && compress(r) {
 		//gzw, err := gzip.NewWriterLevel(w.Writer, t.GzipCompressionLevel)
 		//if err != nil {
 		//	return err
