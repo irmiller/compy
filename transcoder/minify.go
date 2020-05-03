@@ -6,7 +6,7 @@ import (
 	"github.com/tdewolff/minify/css"
 	"github.com/tdewolff/minify/html"
 	"github.com/tdewolff/minify/js"
-	"github.com/tdewolff/minify/json"
+	//"github.com/tdewolff/minify/json"
 	"net/http"
 )
 
