@@ -168,7 +168,7 @@ func (p *Proxy) handle(w http.ResponseWriter, r *http.Request) error {
 	
 	totalr := atomic.LoadUint64(&p.ReadCount)
 	totalw := atomic.LoadUint64(&p.WriteCount)
-	log.Printf("Transcoded: %dMB : %dMB (%3.1f%%)", totalw, totalr, float64(totalw)/float64(totalr)*100)
+	log.Printf("\33[2K\rTranscoded: %dMB (%3.1f%%)", totalw, totalr, float64(totalw)/float64(totalr)*100)
 	
 	return err
 }
@@ -224,6 +224,7 @@ func forward(r *http.Request) (*http.Response, error) {
 func (p *Proxy) proxyResponse(w *ResponseWriter, r *ResponseReader, headers http.Header) error {
 	w.takeHeaders(r)
 	transcoder, found := p.transcoders[r.ContentType()]
+	log.Printf(found)
 	if !found {
 		return w.ReadFrom(r)
 	}
