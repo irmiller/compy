@@ -8,7 +8,6 @@ import (
 	"github.com/tdewolff/minify/js"
 	"github.com/tdewolff/minify/json"
 	"net/http"
-	"log"
 )
 
 type Minifier struct {
