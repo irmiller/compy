@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"github.com/irmiller/compy/proxy"
 	brotlidec "gopkg.in/kothar/brotli-go.v0/dec"
+	"log"
 	//brotlienc "gopkg.in/kothar/brotli-go.v0/enc"
 )
 
@@ -60,7 +61,7 @@ func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		if err != nil {
 			return err
 		}
-		/defer gzw.Close()
+		defer gzw.Close()
 		w.Writer = gzw
 		w.Header().Set("Content-Encoding", "gzip")
 	//}
