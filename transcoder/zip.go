@@ -4,8 +4,8 @@ import (
 	"compress/gzip"
 	"net/http"
 	"github.com/irmiller/compy/proxy"
-	brotlidec "gopkg.in/kothar/brotli-go.v0/dec"
-	brotlienc "gopkg.in/kothar/brotli-go.v0/enc"
+	//brotlidec "gopkg.in/kothar/brotli-go.v0/dec"
+	//brotlienc "gopkg.in/kothar/brotli-go.v0/enc"
 )
 
 type Zip struct {
