@@ -170,7 +170,7 @@ func (p *Proxy) handle(w http.ResponseWriter, r *http.Request) error {
 	totalr := atomic.LoadUint64(&p.ReadCount)
 	totalw := atomic.LoadUint64(&p.WriteCount)
 	vt100.ClearScreen()
-	log.Printf("\33[2K\rTranscoded: %dMB (%3.1f%%)", totalw, totalr, float64(totalw)/float64(totalr)*100)
+	log.Printf("Transcoded: %dMB (%3.1f%%)", totalw, totalr, float64(totalw)/float64(totalr)*100)
 	
 	return err
 }
