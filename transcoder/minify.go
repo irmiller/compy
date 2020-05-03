@@ -6,7 +6,7 @@ import (
 	"github.com/tdewolff/minify/css"
 	"github.com/tdewolff/minify/html"
 	"github.com/tdewolff/minify/js"
-	"github.com/tdewolff/minify/json"
+	//"github.com/tdewolff/minify/json"
 	"net/http"
 )
 
@@ -21,7 +21,7 @@ func NewMinifier() *Minifier {
 	m.AddFunc("text/javascript", js.Minify)
 	m.AddFunc("application/javascript", js.Minify)
 	m.AddFunc("application/x-javascript", js.Minify)
-	m.AddFunc("application/json", json.Minify)
+	m.AddFunc("application/json", js.Minify)
 	return &Minifier{
 		m: m,
 	}
