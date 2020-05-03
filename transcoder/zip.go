@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"github.com/irmiller/compy/proxy"
 	brotlidec "gopkg.in/kothar/brotli-go.v0/dec"
+	"log"
 	//brotlienc "gopkg.in/kothar/brotli-go.v0/enc"
 )
 
@@ -28,6 +29,7 @@ func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	//}
 
 	// always gunzip if the client supports Brotli
+	log.Printf(r.Header().Get("Host")
 	if r.Header().Get("Content-Encoding") == "gzip" && (shouldBrotli || !t.SkipCompressed) {
 		gzr, err := gzip.NewReader(r.Reader)
 		if err != nil {
