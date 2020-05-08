@@ -22,7 +22,7 @@ var (
 	pass  = flag.String("pass", "", "proxy password")
 
 	brotli = flag.Int("brotli", 11, "Brotli compression level (0-11)")
-	jpeg   = flag.Int("jpeg", 18, "jpeg quality (1-100, 0 to disable)")
+	jpeg   = flag.Int("jpeg", 25, "jpeg quality (1-100, 0 to disable)")
 	gif    = flag.Bool("gif", true, "transcode gifs into static images")
 	gzip   = flag.Int("gzip", 9, "gzip compression level (0-9)")
 	png    = flag.Bool("png", true, "transcode png")
