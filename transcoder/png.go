@@ -5,7 +5,8 @@ import (
 	"github.com/chai2010/webp"
 	"image/png"
 	"net/http"
-// 	"github.com/pixiv/go-libjpeg/jpeg"
+	"image/gif"
+	"github.com/pixiv/go-libjpeg/jpeg"
 	//"log"
 )
 
@@ -14,10 +15,13 @@ type Png struct{}
 func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 	img, err := png.Decode(r)
 	if err != nil {
-// 		img, err = jpeg.Decode(r,&jpeg.DecoderOptions{})
-// 		if err != nil {
-			return err
-// 		}
+		img, err = jpeg.Decode(r,&jpeg.DecoderOptions{})
+		if err != nil {
+			img, err = gif.Decode(r)
+			if err != nil {
+				return err
+			}
+		}
 	}
 	if SupportsWebP(headers) {
 		w.Header().Set("Content-Type", "image/webp")
