@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"image/gif"
 	"github.com/pixiv/go-libjpeg/jpeg"
-	"log"
+// 	"log"
 	"fmt"
 )
 
