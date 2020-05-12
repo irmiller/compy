@@ -32,10 +32,10 @@ func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 				return err
 			}
 			w.Header().Set("Content-Type", "image/webp")
-				options := webp.Options{
-				Lossless: false,
-				Quality: float32(25),
-			}
+// 			options := webp.Options{
+// 				Lossless: false,
+// 				Quality: float32(25),
+// 			}
 			converter  := giftowebp.NewConverter()
 			converter.WebPConfig.SetQuality(25)
 			converter.WebPConfig.SetPreprocessing(2)
