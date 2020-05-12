@@ -18,7 +18,7 @@ type Zip struct {
 
 func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 	shouldBrotli := false
-	shouldGzip := false
+// 	shouldGzip := false
 	//for _, v := range strings.Split(headers.Get("Accept-Encoding"), ", ") {
 	//	//switch strings.SplitN(v, ";", 2)[0] {
 		//case "br":
