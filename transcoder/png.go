@@ -40,9 +40,10 @@ func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 			converter.WebPConfig.SetQuality(25)
 			converter.WebPConfig.SetPreprocessing(2)
 			webpBin, _  := converter.Convert(gifBin)
-			if err = webp.Encode(w, webpBin, &options); err != nil {
-				return err
-			}
+			w.Write(webpBin)
+// 			if err = webp.Encode(w, webpBin, &options); err != nil {
+// 				return err
+// 			}
 			return nil
 			
 		}
