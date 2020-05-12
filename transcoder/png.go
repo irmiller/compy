@@ -15,15 +15,13 @@ type Png struct{}
 
 func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 	img, err := png.Decode(r)
-	fmt.Errorf("Error 1 %s",err)
+// 	fmt.Errorf("Error 1 %s",err)
 	if err != nil {
-		img, err1 = jpeg.Decode(r,&jpeg.DecoderOptions{})
-		fmt.Errorf("Error 2 %s",err)
-		if err1 != nil {
-			img, err2 = gif.Decode(r)
-			fmt.Errorf("Error 3 %s",err)
-			if err2 != nil {
-				return err2
+		img, err =: jpeg.Decode(r,&jpeg.DecoderOptions{})
+		if err != nil {
+			img, err:= gif.Decode(r)
+			if err != nil {
+				return err
 			}
 		}
 	}
