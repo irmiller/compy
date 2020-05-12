@@ -8,10 +8,10 @@ import (
 // 	"image/gif"
 	"github.com/pixiv/go-libjpeg/jpeg"
 // 	"log"
-	"fmt"
-	"io/ioutil"
-	"image/webp"
-	giftowebp "github.com/sizeofint/gif-to-webp"
+// 	"fmt"
+// 	"io/ioutil"
+// 	"image/webp"
+// 	giftowebp "github.com/sizeofint/gif-to-webp"
 )
 
 type Png struct{}
@@ -24,11 +24,9 @@ func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	if err != nil {
 		err = nil
 		img, err = jpeg.Decode(r, &jpeg.DecoderOptions{})
-		fmt.Println("Error 2 %s",err)
 		if err != nil {
-			err = nil
-			img,err = webp.Decode(r)
-			fmt.Println("Error 3 %s",err)
+			w.write(r)
+			return nil
 		}
 	}
 	if SupportsWebP(headers) {
