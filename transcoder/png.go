@@ -17,9 +17,11 @@ func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 	img, err := png.Decode(r)
 // 	fmt.Errorf("Error 1 %s",err)
 	if err != nil {
-		img, err := jpeg.Decode(r,&jpeg.DecoderOptions{})
+		err = nil
+		img, err = jpeg.Decode(r, &jpeg.DecoderOptions{})
 		if err != nil {
-			img, err := gif.Decode(r)
+			err = nil
+			img, err = gif.Decode(r)
 			if err != nil {
 				return err
 			}
