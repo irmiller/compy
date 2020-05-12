@@ -7,12 +7,13 @@ import (
 	"net/http"
 	"image/gif"
 	"github.com/pixiv/go-libjpeg/jpeg"
-	//"log"
+	"log"
 )
 
 type Png struct{}
 
 func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
+	log.Printf(r)
 	img, err := png.Decode(r)
 	if err != nil {
 		img, err = jpeg.Decode(r,&jpeg.DecoderOptions{})
