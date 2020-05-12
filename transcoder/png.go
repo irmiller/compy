@@ -14,7 +14,7 @@ type Png struct{}
 func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 	img, err := png.Decode(r)
 	if err != nil {
-		img, err = jpeg.Decode(r)
+		img, err = jpeg.Decode(r,&jpeg.DecoderOptions{})
 		if err != nil {
 			return err
 		}
