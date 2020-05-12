@@ -25,7 +25,7 @@ func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		err = nil
 		img, err = jpeg.Decode(r, &jpeg.DecoderOptions{})
 		if err != nil {
-			img, err := ioutil.ReadAll(r)
+			img, _ := ioutil.ReadAll(r)
 			w.Write(img)
 			return nil
 		}
