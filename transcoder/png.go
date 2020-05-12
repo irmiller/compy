@@ -13,12 +13,14 @@ import (
 type Png struct{}
 
 func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
-	log.Printf(r)
 	img, err := png.Decode(r)
+	log.Printf(err)
 	if err != nil {
 		img, err = jpeg.Decode(r,&jpeg.DecoderOptions{})
+		log.Printf(err)
 		if err != nil {
 			img, err = gif.Decode(r)
+			log.Printf(err)
 			if err != nil {
 				return err
 			}
