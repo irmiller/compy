@@ -8,7 +8,7 @@ import (
 	"image/gif"
 	"github.com/pixiv/go-libjpeg/jpeg"
 // 	"log"
-	"fmt"
+// 	"fmt"
 )
 
 type Png struct{}
