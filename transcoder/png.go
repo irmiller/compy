@@ -10,6 +10,7 @@ import (
 // 	"log"
 	"fmt"
 	"io/ioutil"
+	"image/webp"
 	giftowebp "github.com/sizeofint/gif-to-webp"
 )
 
@@ -26,26 +27,8 @@ func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		fmt.Println("Error 2 %s",err)
 		if err != nil {
 			err = nil
-			img, err := ioutil.ReadAll(r)
+			img,err = webp.Decode(r)
 			fmt.Println("Error 3 %s",err)
-// 			if err != nil {
-// 				return err
-// 			}
-			w.Header().Set("Content-Type", "image/webp")
-// 			options := webp.Options{
-// 				Lossless: false,
-// 				Quality: float32(25),
-// 			}
-			converter  := giftowebp.NewConverter()
-			converter.WebPConfig.SetQuality(25)
-			converter.WebPConfig.SetPreprocessing(2)
-			webpBin, _  := converter.Convert(img)
-			w.Write(webpBin)
-// 			if err = webp.Encode(w, webpBin, &options); err != nil {
-// 				return err
-// 			}
-			return nil
-			
 		}
 	}
 	if SupportsWebP(headers) {
