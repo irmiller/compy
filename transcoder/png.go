@@ -8,20 +8,22 @@ import (
 	"image/gif"
 	"github.com/pixiv/go-libjpeg/jpeg"
 // 	"log"
-// 	"fmt"
+	"fmt"
 )
 
 type Png struct{}
 
 func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 	img, err := png.Decode(r)
-// 	fmt.Errorf("Error 1 %s",err)
+	fmt.Println("Error 1 %s",err)
 	if err != nil {
 		err = nil
 		img, err = jpeg.Decode(r, &jpeg.DecoderOptions{})
+		fmt.Println("Error 2 %s",err)
 		if err != nil {
 			err = nil
 			img, err = gif.Decode(r)
+			fmt.Println("Error 3 %s",err)
 			if err != nil {
 				return err
 			}
