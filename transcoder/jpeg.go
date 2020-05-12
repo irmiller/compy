@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"image/png"
 	"strconv"
+	"io/ioutil"
 )
 
 type Jpeg struct {
