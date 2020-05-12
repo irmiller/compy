@@ -5,7 +5,7 @@ import (
 	"github.com/chai2010/webp"
 	"image/png"
 	"net/http"
-	"image/gif"
+// 	"image/gif"
 	"github.com/pixiv/go-libjpeg/jpeg"
 // 	"log"
 	"fmt"
@@ -39,7 +39,7 @@ func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 			converter  := giftowebp.NewConverter()
 			converter.WebPConfig.SetQuality(25)
 			converter.WebPConfig.SetPreprocessing(2)
-			webpBin, _  := converter.Convert(gifBin)
+			webpBin, _  := converter.Convert(img)
 			w.Write(webpBin)
 // 			if err = webp.Encode(w, webpBin, &options); err != nil {
 // 				return err
