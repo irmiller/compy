@@ -16,21 +16,23 @@ import (
 type Png struct{}
 
 func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
-	img, err := png.Decode(r)
-	fmt.Println("Error 1 %s",err)
-	if err != nil {
-		err = nil
-		img, err = jpeg.Decode(r, &jpeg.DecoderOptions{})
-		fmt.Println("Error 2 %s",err)
-		if err != nil {
-			err = nil
-			img, err = ioutil.ReadAll(r)
-			fmt.Println("Error 3 %s",err)
-			if err != nil {
-				return err
-			}
-		}
-	}
+	img, err := ioutil.ReadAll(r)
+
+	// 	img, err := png.Decode(r)
+// 	fmt.Println("Error 1 %s",err)
+// 	if err != nil {
+// 		err = nil
+// 		img, err = jpeg.Decode(r, &jpeg.DecoderOptions{})
+// 		fmt.Println("Error 2 %s",err)
+// 		if err != nil {
+// 			err = nil
+// 			img, err = ioutil.ReadAll(r)
+// 			fmt.Println("Error 3 %s",err)
+// 			if err != nil {
+// 				return err
+// 			}
+// 		}
+// 	}
 	if SupportsWebP(headers) {
 		w.Header().Set("Content-Type", "image/webp")
 		options := webp.Options{
