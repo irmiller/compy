@@ -28,9 +28,9 @@ func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 			err = nil
 			img, err := ioutil.ReadAll(r)
 			fmt.Println("Error 3 %s",err)
-			if err != nil {
-				return err
-			}
+// 			if err != nil {
+// 				return err
+// 			}
 			w.Header().Set("Content-Type", "image/webp")
 // 			options := webp.Options{
 // 				Lossless: false,
