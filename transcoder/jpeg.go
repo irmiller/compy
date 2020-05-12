@@ -5,6 +5,7 @@ import (
 	"github.com/chai2010/webp"
 	"github.com/pixiv/go-libjpeg/jpeg"
 	"net/http"
+	"image/png"
 	"strconv"
 )
 
@@ -26,9 +27,15 @@ func NewJpeg(quality int) *Jpeg {
 func (t *Jpeg) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 	img, err := jpeg.Decode(r, t.decOptions)
 	if err != nil {
-		return err
+		err = nil
+		img, err = png.Decode(r)
+		if err != nil {
+			img, _ := ioutil.ReadAll(r)
+			w.Write(img)
+			return nil
+		}
 	}
-
+	
 	encOptions := t.encOptions
 	qualityString := headers.Get("X-Compy-Quality")
 	if qualityString != "" {
@@ -42,7 +49,7 @@ func (t *Jpeg) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 		w.Header().Set("Content-Type", "image/webp")
 		options := webp.Options{
 			Lossless: false,
-			Quality:  float32(encOptions.Quality),
+			Quality:  float32(25),
 		}
 		if err = webp.Encode(w, img, &options); err != nil {
 			return err
