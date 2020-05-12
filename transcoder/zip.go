@@ -17,8 +17,8 @@ type Zip struct {
 }
 
 func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
-	shouldBrotli := true
-// 	/shouldGzip := false
+	shouldBrotli := false
+	shouldGzip := false
 	//for _, v := range strings.Split(headers.Get("Accept-Encoding"), ", ") {
 	//	//switch strings.SplitN(v, ";", 2)[0] {
 		//case "br":
@@ -47,21 +47,21 @@ func (t *Zip) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		r.Header().Del("Content-Encoding")
 		w.Header().Del("Content-Encoding")
 	}
-	if r.Header().Get("Content-Type") != "application/json" {
-		params := brotlienc.NewBrotliParams()
-		params.SetQuality(t.BrotliCompressionLevel)
-		brw := brotlienc.NewBrotliWriter(params, w.Writer)
-		defer brw.Close()
-		w.Writer = brw
-		w.Header().Set("Content-Encoding", "br")
-	} else {
-		gzw, err := gzip.NewWriterLevel(w.Writer, 9)
-		if err != nil {
-			return err
-		}
-		defer gzw.Close()
-		w.Writer = gzw
-		w.Header().Set("Content-Encoding", "gzip")
+// 	if r.Header().Get("Content-Type") != "application/json" {
+// 		params := brotlienc.NewBrotliParams()
+// 		params.SetQuality(t.BrotliCompressionLevel)
+// 		brw := brotlienc.NewBrotliWriter(params, w.Writer)
+// 		defer brw.Close()
+// 		w.Writer = brw
+// 		w.Header().Set("Content-Encoding", "br")
+// 	} else {
+	gzw, err := gzip.NewWriterLevel(w.Writer, 9)
+	if err != nil {
+		return err
+	}
+	defer gzw.Close()
+	w.Writer = gzw
+	w.Header().Set("Content-Encoding", "gzip")
 	}
 	return t.Transcoder.Transcode(w, r, headers)
 }
