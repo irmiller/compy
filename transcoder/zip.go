@@ -6,7 +6,7 @@ import (
 	"github.com/irmiller/compy/proxy"
 	brotlidec "gopkg.in/kothar/brotli-go.v0/dec"
 // 	"log"
-	brotlienc "gopkg.in/kothar/brotli-go.v0/enc"
+// 	brotlienc "gopkg.in/kothar/brotli-go.v0/enc"
 )
 
 type Zip struct {
