@@ -9,7 +9,7 @@ import (
 	"github.com/pixiv/go-libjpeg/jpeg"
 // 	"log"
 // 	"fmt"
-// 	"io/ioutil"
+	"io/ioutil"
 // 	"image/webp"
 // 	giftowebp "github.com/sizeofint/gif-to-webp"
 )
@@ -25,7 +25,8 @@ func (t *Png) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, header
 		err = nil
 		img, err = jpeg.Decode(r, &jpeg.DecoderOptions{})
 		if err != nil {
-			w.Write(r)
+			img, err := ioutil.ReadAll(r)
+			w.Write(img)
 			return nil
 		}
 	}
