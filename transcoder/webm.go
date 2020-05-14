@@ -8,7 +8,7 @@ import (
 // 	"image/png"
 // 	"strconv"
 // 	"io/ioutil"
-	"github.com/xfrr/goffmpeg/transcode"
+	"github.com/xfrr/goffmpeg/transcoder"
 )
 
 func (t *Webm) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
