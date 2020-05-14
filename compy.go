@@ -26,7 +26,7 @@ var (
 	gif    = flag.Bool("gif", true, "transcode gifs into static images")
 	gzip   = flag.Int("gzip", 9, "gzip compression level (0-9)")
 	png    = flag.Bool("png", true, "transcode png")
-	webm   = flag.Bool("webm", false, "transcode webm")
+	webm   = flag.Bool("webm", true, "transcode webm")
 	minify = flag.Bool("minify", true, "minify css/html/js - WARNING: tends to break the web")
 )
 
@@ -64,11 +64,11 @@ func main() {
 		p.AddTranscoder("image/gif", &tc.Gif{})
 	}
 	if *png {
-		p.AddTranscoder("image/png", &tc.image{})
+		p.AddTranscoder("image/png", &tc.Png{})
 	}
-	//if *webm {
-	//	p.AddTranscoder("video/webm", &tc.Webm{})
-	//}
+	if *webm {
+		p.AddTranscoder("video/webm", &tc.Webm{})
+	}
 
 	var ttc proxy.Transcoder
 	if *minify {
