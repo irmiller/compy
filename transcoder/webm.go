@@ -7,7 +7,9 @@ import (
 	"net/http"
 // 	"image/png"
 // 	"strconv"
-// 	"io/ioutil"
+	"io/ioutil"
+// 	"testing"
+	"sync"
 	"github.com/xfrr/goffmpeg/transcoder"
 )
 type Webm struct{}
