@@ -10,6 +10,7 @@ import (
 // 	"io/ioutil"
 	"github.com/xfrr/goffmpeg/transcoder"
 )
+type Webm struct{}
 
 func (t *Webm) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, headers http.Header) error {
 // 	err := webpbin.NewCWebP().
