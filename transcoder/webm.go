@@ -23,30 +23,32 @@ func (t *Webm) Transcode(w *proxy.ResponseWriter, r *proxy.ResponseReader, heade
 // 	if err != nil {
 // 		return err
 // 	}
-	trans := new(transcoder.Transcoder)
-	err := trans.InitializeEmptyTranscoder()
+	cmdName := "ffmpeg"
+	args := []string{
+		"-hide_banner",
+		"-re",
+		"-i",
+		"pipe:0,
+		"-preset",
+		"superfast",
+		"-c:v",
+		"h264",
+		"-crf",
+		"0",
+		"-c",
+		"copy",
+		"-f", "rawvideo", "-",
+	}
+	cmd := exec.Command(cmdName, args...)
+	cmd.Stdin = bytes.NewReader(io.ReadAll(r))
 	
-// 	trans.MediaFile().SetFrameRate(70)
-// 	trans.MediaFile().SetPreset("veryfast")
+	err2 := cmd.Start()
 	
-	w_pipe, err := trans.CreateInputPipe()
-	r = w_pipe
-	r_pipe, err := trans.CreateOutputPipe("mkv")
+	var buf bytes.Buffer
+	n, err := io.Copy(&buf, cmd.StdoutPipe())
+	err = cmd.Wait()
+	data := buf.Bytes()
 	
-	wg := &sync.WaitGroup{}
-	wg.Add(1)
-	go func() {
-		data, err := ioutil.ReadAll(r_pipe)
-		r_pipe.Close()
-		wg.Done()
-	}()
-	go func() {
-		w_pipe.Close()
-	}()
-	done := trans.Run(false)
-	err = <-done
-
-	wg.Wait()
 	
 	w.Write(data)
 	w.Header().Set("Content-Type", "video/mastroka")
