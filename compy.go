@@ -64,7 +64,7 @@ func main() {
 		p.AddTranscoder("image/gif", &tc.Gif{})
 	}
 	if *png {
-		p.AddTranscoder("image/png", &tc.Png{})
+		p.AddTranscoder("image/png", &tc.image{})
 	}
 	//if *webm {
 	//	p.AddTranscoder("video/webm", &tc.Webm{})
