@@ -151,8 +151,8 @@ func (p *Proxy) handle(w http.ResponseWriter, r *http.Request) error {
 	if hostname, err := os.Hostname(); host == p.host || (err == nil && host == hostname+p.host) {
 		return p.handleLocalRequest(w, r)
 	}
-	heada := r.Header
-	heada["Connection"] = nil
+// 	heada := r.Header
+// 	heada["Connection"] = nil
 	resp, err := forward(r)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
