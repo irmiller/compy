@@ -152,7 +152,7 @@ func (p *Proxy) handle(w http.ResponseWriter, r *http.Request) error {
 		return p.handleLocalRequest(w, r)
 	}
 	heada := r.Header
-	heada[X-Forwarded-For] = nil
+	heada["X-Forwarded-For"] = nil
 	heada["Connection"] = nil
 	resp, err := forward(r)
 	if err != nil {
