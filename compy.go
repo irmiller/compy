@@ -16,8 +16,8 @@ var (
 	host  = flag.String("host", ":8888", "<host:port>")
 	cert  = flag.String("cert", "", "proxy cert path")
 	key   = flag.String("key", "", "proxy cert key path")
-	ca    = flag.String("ca", "/home/irmillering/go/bin/cert.crt", "CA path")
-	caKey = flag.String("cakey", "/home/irmillering/go/bin/cert.key", "CA key path")
+	ca    = flag.String("ca", "/home/ubuntu/go/bin/ca.crt", "CA path")
+	caKey = flag.String("cakey", "/home/ubuntu/go/bin/ca.key", "CA key path")
 	user  = flag.String("user", "", "proxy user name")
 	pass  = flag.String("pass", "", "proxy password")
 
